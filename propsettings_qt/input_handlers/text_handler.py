@@ -3,7 +3,7 @@ from PySide2 import QtCore
 from PySide2.QtWidgets import QLineEdit
 
 from propsettings.setting import Setting
-from uix.settings.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.input_handler import InputHandler
 
 
 class TextHandler(InputHandler):

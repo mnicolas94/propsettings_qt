@@ -2,8 +2,8 @@ from PySide2 import QtWidgets, QtCore, QtGui
 
 from propsettings.setting import Setting
 from propsettings.setting_types.range_setting_type import Range
-from uix.settings.input_handlers.input_handler import InputHandler
-from uix.widgets.float_slider import FloatSlider
+from propsettings_qt.input_handlers.input_handler import InputHandler
+from propsettings_qt.widgets.float_slider import FloatSlider
 
 
 class RangeHandler(InputHandler):

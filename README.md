@@ -1,3 +1,4 @@
-# propsettings
+# propsettings_qt
 
-This packages enables you to decorate class member variables as a Setting. A Setting is a kind of property that let you define some characteristics of the variable that are taken into account by a user interface code to render that variable properly.
+This package provides a mechanism of automatic PySide2 (Qt) widget generation to edit member variables of an object.
+The variables should be registered as a propsettings.Setting. See [propsettings](https://github.com/mnicolas94/propsettings) for more information.

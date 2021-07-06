@@ -5,7 +5,7 @@ from PySide2.QtWidgets import QVBoxLayout, QScrollArea, QWidget
 
 from propsettings.setting import Setting
 from propsettings import configurable
-from uix.settings import setting_widget_retrieval
+from propsettings_qt import setting_widget_retrieval
 
 
 class SettingsAreaWidget(QScrollArea):

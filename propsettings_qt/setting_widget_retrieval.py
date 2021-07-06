@@ -6,12 +6,12 @@ from propsettings.setting import Setting
 from propsettings.setting_type import SettingType
 from propsettings.setting_types.range_setting_type import Range
 from propsettings.setting_types.selectable_setting_type import Selectable
-from uix.settings.input_handlers.bool_handler import BoolHandler
-from uix.settings.input_handlers.input_handler import InputHandler
-from uix.settings.input_handlers.object_handler import ObjectHandler
-from uix.settings.input_handlers.range_handler import RangeHandler
-from uix.settings.input_handlers.selectable_handler import SelectableHandler
-from uix.settings.input_handlers.text_handler import TextHandler
+from propsettings_qt.input_handlers.bool_handler import BoolHandler
+from propsettings_qt.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.object_handler import ObjectHandler
+from propsettings_qt.input_handlers.range_handler import RangeHandler
+from propsettings_qt.input_handlers.selectable_handler import SelectableHandler
+from propsettings_qt.input_handlers.text_handler import TextHandler
 
 
 setting_type_handlers: Dict[Type[SettingType], Type[InputHandler]] = {

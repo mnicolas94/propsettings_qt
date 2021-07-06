@@ -2,7 +2,7 @@ from PySide2.QtWidgets import QCheckBox
 from PySide2.QtCore import Qt
 
 from propsettings.setting import Setting
-from uix.settings.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.input_handler import InputHandler
 
 
 class BoolHandler(InputHandler):

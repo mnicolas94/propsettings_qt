@@ -41,15 +41,18 @@ if __name__ == '__main__':
             long_description = fh.read()
 
         setuptools.setup(
-            name="propsettings",
+            name="propsettings_qt",
             version=version,
             author="Miguel Nicolás-Díaz",
             author_email="miguelcok27@gmail.com",
-            description="A python package to define how a class member should be rendered in a UI.",
+            description="Provides automatic widget generation for editing member variables of an object.",
             long_description=long_description,
             long_description_content_type="text/markdown",
             url="https://github.com/mnicolas94/propsettings",
-            packages=['propsettings', 'propsettings.decorators', 'propsettings.setting_types'],
+            packages=['propsettings_qt', 'propsettings_qt.input_handlers', 'propsettings_qt.widgets'],
+            install_requires=[
+                'propsettings'
+            ],
             classifiers=[
                 "Programming Language :: Python :: 3",
                 "License :: OSI Approved :: MIT License",

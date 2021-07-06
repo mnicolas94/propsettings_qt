@@ -2,7 +2,7 @@ from PySide2 import QtWidgets, QtCore
 
 from propsettings.setting import Setting
 from propsettings.setting_types.selectable_setting_type import Selectable
-from uix.settings.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.input_handler import InputHandler
 
 
 class SelectableHandler(InputHandler):
