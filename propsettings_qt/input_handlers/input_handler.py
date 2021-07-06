@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 
 from propsettings.setting import Setting
-from pypegraph.action import Action
 
 
 class InputHandler(ABC):
@@ -30,7 +29,6 @@ class InputHandler(ABC):
 		self._setting_owner = setting_owner
 		self._setting = setting
 		self._setting_type = setting.setting_value_type or type(self._get_value())
-		self.event_value_edited = Action()
 
 	def _get_value(self):
 		"""

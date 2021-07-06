@@ -65,7 +65,6 @@ class TextHandler(InputHandler):
 		"""
 		value = self._get_value_from_edit()
 		self._set_value(value)
-		self.event_value_edited.invoke(value)
 
 
 class _LineEditHandler(QLineEdit):

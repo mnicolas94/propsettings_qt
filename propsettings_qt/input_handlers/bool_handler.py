@@ -35,7 +35,6 @@ class BoolHandler(InputHandler):
 		"""
 		value = state == Qt.CheckState.Checked
 		self._set_value(value)
-		self.event_value_edited.invoke(value)
 
 
 class _CheckBoxHandler(QCheckBox):

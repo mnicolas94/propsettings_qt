@@ -51,7 +51,8 @@ if __name__ == '__main__':
             url="https://github.com/mnicolas94/propsettings",
             packages=['propsettings_qt', 'propsettings_qt.input_handlers', 'propsettings_qt.widgets'],
             install_requires=[
-                'propsettings'
+                'propsettings',
+                'PySide2'
             ],
             classifiers=[
                 "Programming Language :: Python :: 3",
