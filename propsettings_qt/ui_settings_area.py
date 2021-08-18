@@ -1,30 +1,23 @@
 from typing import List
 
 from PySide2 import QtWidgets
-from PySide2.QtWidgets import QVBoxLayout, QScrollArea, QWidget
 
 from propsettings.setting import Setting
 from propsettings import configurable
 from propsettings_qt import setting_widget_retrieval
 
 
-class SettingsAreaWidget(QScrollArea):
+class SettingsAreaWidget(QtWidgets.QFrame):
     """
     Widget que muestra las configuraciones de un objeto y permite editarlas.
     """
 
-    def __init__(self, parent=None, layout=None):
+    def __init__(self, parent=None):
         super(SettingsAreaWidget, self).__init__(parent=parent)
-        layout = layout or QVBoxLayout()
-        wgt = QWidget()
-        wgt.setLayout(layout)
-        self.setWidgetResizable(True)
-        self.setWidget(wgt)
+        self._layout = QtWidgets.QFormLayout()
+        self.setLayout(self._layout)
         self.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-
-        self.tittle_label = QtWidgets.QLabel('Properties')
-        self.widget().layout().addWidget(self.tittle_label)
-        self.widget().layout().addStretch()
+        self.setFrameStyle(QtWidgets.QFrame.Panel | QtWidgets.QFrame.Plain)
 
     def populate_configurations(self, obj):
         """
@@ -37,16 +30,14 @@ class SettingsAreaWidget(QScrollArea):
         settings = self._sort_settings(settings)
         for stg in settings:
             stg_widget = self.get_setting_widget(obj, stg)
-            widgets_added = self.widget().layout().count() - 2
-            pos = widgets_added + 1
-            self.widget().layout().insertWidget(pos, stg_widget)
+            self._layout.addRow(stg.label, stg_widget)
 
     def clear(self):
-        while self.widget().layout().count() > 2:  # 2 porque el 1ro es el titulo y el 2do es el spacer
-            item = self.widget().layout().itemAt(1)
+        while self._layout.count() > 0:
+            item = self._layout.itemAt(0)
             wgt = item.widget()
             if wgt:
-                self.widget().layout().removeItem(item)
+                self._layout.removeItem(item)
                 wgt.deleteLater()
 
     def get_setting_widget(self, obj, setting: Setting):
@@ -56,17 +47,8 @@ class SettingsAreaWidget(QScrollArea):
         :param setting:
         :return:
         """
-        setting_widget = QWidget()
-
-        label = QtWidgets.QLabel(setting.label)
         input_widget = setting_widget_retrieval.get_setting_widget(obj, setting)
-
-        layout = QtWidgets.QHBoxLayout()
-        layout.addWidget(label)
-        layout.addWidget(input_widget)
-
-        setting_widget.setLayout(layout)
-        return setting_widget
+        return input_widget
 
     def _sort_settings(self, settings: List[Setting]):
         """

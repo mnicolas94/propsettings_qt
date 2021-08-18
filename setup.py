@@ -48,7 +48,7 @@ if __name__ == '__main__':
             description="Provides automatic widget generation for editing member variables of an object.",
             long_description=long_description,
             long_description_content_type="text/markdown",
-            url="https://github.com/mnicolas94/propsettings",
+            url="https://github.com/mnicolas94/propsettings_qt",
             packages=['propsettings_qt', 'propsettings_qt.input_handlers', 'propsettings_qt.widgets'],
             install_requires=[
                 'propsettings',
