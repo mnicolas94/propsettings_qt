@@ -17,6 +17,11 @@ class SettingsAreaWidget(QtWidgets.QFrame):
         self._layout = QtWidgets.QFormLayout()
         self.setLayout(self._layout)
         self.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        self._settings_count: int = 0
+
+    @property
+    def settings_count(self) -> int:
+        return self._settings_count
 
     def populate_configurations(self, obj):
         """
@@ -31,7 +36,8 @@ class SettingsAreaWidget(QtWidgets.QFrame):
             stg_widget = self.get_setting_widget(obj, stg)
             self._layout.addRow(stg.label, stg_widget)
 
-        if len(settings) > 0:
+        self._settings_count = len(settings)
+        if self._settings_count > 0:
             self.setFrameStyle(QtWidgets.QFrame.Panel | QtWidgets.QFrame.Plain)
         else:
             self.setFrameStyle(QtWidgets.QFrame.NoFrame)
@@ -43,6 +49,7 @@ class SettingsAreaWidget(QtWidgets.QFrame):
             if wgt:
                 self._layout.removeItem(item)
                 wgt.deleteLater()
+        self._settings_count = 0
 
     def get_setting_widget(self, obj, setting: Setting):
         """
