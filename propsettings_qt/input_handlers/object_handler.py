@@ -13,7 +13,7 @@ class ObjectHandler(InputHandler):
 
 		super().__init__(setting_owner=setting_owner, setting=setting)
 		self.widget = SettingsAreaWidget()
-		self.widget.populate_configurations(setting.fget(self._setting_owner))
+		self.widget.populate_object(setting.fget(self._setting_owner))
 
 	def get_widget(self):
 		return self.widget
