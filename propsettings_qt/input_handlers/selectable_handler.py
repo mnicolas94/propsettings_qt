@@ -2,10 +2,10 @@ from PySide2 import QtWidgets, QtCore
 
 from propsettings.setting import Setting
 from propsettings.setting_types.selectable_setting_type import Selectable
-from propsettings_qt.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.input_handler import SettingDrawer
 
 
-class SelectableHandler(InputHandler):
+class SelectableHandler(SettingDrawer):
 
     def __init__(self, selectable: Selectable, setting_owner, setting: Setting):
         super(SelectableHandler, self).__init__(setting_owner, setting)

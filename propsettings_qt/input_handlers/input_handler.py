@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from propsettings.setting import Setting
 
 
-class InputHandler(ABC):
+class SettingDrawer(ABC):
 	"""
 	Clase abstracta para implementar widgets que gestionen la entrada para dar valores a atributos de tipo configurable.Setting.
 	Cuando los widgets editen el valor de la configuración, deben notificarlo a través del atributo event_value_edited.

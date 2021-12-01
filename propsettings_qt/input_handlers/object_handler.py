@@ -1,8 +1,8 @@
 from propsettings.setting import Setting
-from propsettings_qt.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.input_handler import SettingDrawer
 
 
-class ObjectHandler(InputHandler):
+class ObjectHandler(SettingDrawer):
 	"""
 	InputHandler que se encarga de las configuraciones que sean de tipo object.
 	Estas solo se podrán modificar si tienen miembros de tipo Setting o si son de algún tipo de dato que se puede cargar.

@@ -2,10 +2,10 @@ from PySide2.QtWidgets import QCheckBox
 from PySide2.QtCore import Qt
 
 from propsettings.setting import Setting
-from propsettings_qt.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.input_handler import SettingDrawer
 
 
-class BoolHandler(InputHandler):
+class BoolHandler(SettingDrawer):
 	"""
 	InputHandler que se encarga de las configuraciones de tipo bool a través de un QCheckBox.
 	"""

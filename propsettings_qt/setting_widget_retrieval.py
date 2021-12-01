@@ -7,7 +7,7 @@ from propsettings.setting_type import SettingType
 from propsettings.setting_types.range_setting_type import Range
 from propsettings.setting_types.selectable_setting_type import Selectable
 from propsettings_qt.input_handlers.bool_handler import BoolHandler
-from propsettings_qt.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.input_handler import SettingDrawer
 from propsettings_qt.input_handlers.object_handler import ObjectHandler
 from propsettings_qt.input_handlers.range_handler import RangeHandler
 from propsettings_qt.input_handlers.selectable_handler import SelectableHandler
@@ -19,12 +19,12 @@ from propsettings_qt.object_drawers.object_drawer import ObjectDrawer
 object_drawers: Dict[type, Type[ObjectDrawer]] = {
 }
 
-setting_type_handlers: Dict[Type[SettingType], Type[InputHandler]] = {
+setting_type_drawers: Dict[Type[SettingType], Type[SettingDrawer]] = {
 	Range: RangeHandler,
 	Selectable: SelectableHandler,
 }
 
-setting_value_type_handlers: Dict[type, Type[InputHandler]] = {
+setting_value_type_handlers: Dict[type, Type[SettingDrawer]] = {
 	bool: BoolHandler,
 	int: TextHandler,
 	float: TextHandler,
@@ -38,9 +38,9 @@ def register_object_drawer(object_type: type, object_drawer_type: Type[ObjectDra
 			object_drawers[object_type] = object_drawer_type
 
 
-def register_setting_type_handler(setting_type: Type[SettingType], handler_type: Type[InputHandler]):
-	if setting_type not in setting_type_handlers:
-		setting_type_handlers[setting_type] = handler_type
+def register_setting_type_drawer(setting_type: Type[SettingType], handler_type: Type[SettingDrawer]):
+	if setting_type not in setting_type_drawers:
+		setting_type_drawers[setting_type] = handler_type
 
 
 def get_object_drawer(obj) -> QtWidgets.QWidget:
@@ -80,8 +80,8 @@ def _get_widget_by_setting_type(obj, setting: Setting) -> Optional[QtWidgets.QWi
 	setting_type = setting.setting_type
 	if setting_type is not None:
 		setting_type_type = type(setting_type)
-		if setting_type_type in setting_type_handlers:
-			handler_class = setting_type_handlers[setting_type_type]
+		if setting_type_type in setting_type_drawers:
+			handler_class = setting_type_drawers[setting_type_type]
 			handler = handler_class(setting_type, obj, setting)
 			widget = handler.get_widget()
 			return widget
@@ -92,7 +92,7 @@ def _get_widget_by_value_type(obj, setting: Setting) -> QtWidgets.QWidget:
 	setting_value_type = setting.setting_value_type or type(setting.fget(obj))
 	if setting_value_type in setting_value_type_handlers:
 		handler_class: type = setting_value_type_handlers[setting_value_type]
-		handler: InputHandler = handler_class(obj, setting)
+		handler: SettingDrawer = handler_class(obj, setting)
 		widget = handler.get_widget()
 	else:
 		widget = ObjectHandler(obj, setting).get_widget()

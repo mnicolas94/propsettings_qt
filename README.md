@@ -37,4 +37,4 @@ widget.populate_object(example_object)
 
 The resulting `widget` will look like
 
-![python_8](https://user-images.githubusercontent.com/35781652/144258460-2bbf4bc2-babd-4549-a93d-249be7da2715.jpg)
+![python_8](docs/example.jpg)

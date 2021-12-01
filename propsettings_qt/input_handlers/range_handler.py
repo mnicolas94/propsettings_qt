@@ -2,11 +2,11 @@ from PySide2 import QtWidgets, QtCore, QtGui
 
 from propsettings.setting import Setting
 from propsettings.setting_types.range_setting_type import Range
-from propsettings_qt.input_handlers.input_handler import InputHandler
+from propsettings_qt.input_handlers.input_handler import SettingDrawer
 from propsettings_qt.widgets.float_slider import FloatSlider
 
 
-class RangeHandler(InputHandler):
+class RangeHandler(SettingDrawer):
 
     def __init__(self, value_range: Range, setting_owner, setting: Setting):
         super(RangeHandler, self).__init__(setting_owner, setting)
