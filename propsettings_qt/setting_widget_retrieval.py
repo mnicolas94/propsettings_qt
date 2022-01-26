@@ -4,9 +4,11 @@ from PySide2 import QtWidgets
 
 from propsettings.setting import Setting
 from propsettings.setting_type import SettingType
+from propsettings.setting_types.path_setting_type import Path
 from propsettings.setting_types.range_setting_type import Range
 from propsettings.setting_types.selectable_setting_type import Selectable
 from propsettings_qt.setting_drawers.bool_setting_drawer import BoolSettingDrawer
+from propsettings_qt.setting_drawers.path_setting_drawer import PathSettingDrawer
 from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
 from propsettings_qt.setting_drawers.object_setting_drawer import ObjectSettingDrawer
 from propsettings_qt.setting_drawers.range_setting_drawer import RangeSettingDrawer
@@ -22,6 +24,7 @@ object_drawers: Dict[type, Type[ObjectDrawer]] = {
 setting_type_drawers: Dict[Type[SettingType], Type[SettingDrawer]] = {
 	Range: RangeSettingDrawer,
 	Selectable: SelectableSettingDrawer,
+	Path: PathSettingDrawer,
 }
 
 setting_value_type_handlers: Dict[type, Type[SettingDrawer]] = {
