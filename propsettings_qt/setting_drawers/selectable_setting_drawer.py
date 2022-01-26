@@ -2,13 +2,13 @@ from PySide2 import QtWidgets, QtCore
 
 from propsettings.setting import Setting
 from propsettings.setting_types.selectable_setting_type import Selectable
-from propsettings_qt.input_handlers.input_handler import SettingDrawer
+from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
 
 
-class SelectableHandler(SettingDrawer):
+class SelectableSettingDrawer(SettingDrawer):
 
     def __init__(self, selectable: Selectable, setting_owner, setting: Setting):
-        super(SelectableHandler, self).__init__(setting_owner, setting)
+        super(SelectableSettingDrawer, self).__init__(setting_owner, setting)
         self._selectable = selectable
 
         self._selectable_widget = SelectableWidget(self, selectable)
@@ -26,7 +26,7 @@ class SelectableHandler(SettingDrawer):
 class SelectableWidget(QtWidgets.QComboBox):
     signal_option_selected = QtCore.Signal(str, object)
 
-    def __init__(self, handler: SelectableHandler, selectable: Selectable, *args, **kwargs):
+    def __init__(self, handler: SelectableSettingDrawer, selectable: Selectable, *args, **kwargs):
         super(SelectableWidget, self).__init__(*args, **kwargs)
         self._handler = handler
         self._selectable = selectable

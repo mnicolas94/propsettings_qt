@@ -2,14 +2,14 @@ from PySide2 import QtWidgets, QtCore, QtGui
 
 from propsettings.setting import Setting
 from propsettings.setting_types.range_setting_type import Range
-from propsettings_qt.input_handlers.input_handler import SettingDrawer
+from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
 from propsettings_qt.widgets.float_slider import FloatSlider
 
 
-class RangeHandler(SettingDrawer):
+class RangeSettingDrawer(SettingDrawer):
 
     def __init__(self, value_range: Range, setting_owner, setting: Setting):
-        super(RangeHandler, self).__init__(setting_owner, setting)
+        super(RangeSettingDrawer, self).__init__(setting_owner, setting)
         self._range = value_range
 
         self._widget = RangeSlider(self, self._range)
@@ -24,7 +24,7 @@ class RangeSlider(QtWidgets.QSplitter):
 
     signal_value_changed = QtCore.Signal(float)
 
-    def __init__(self, handler: RangeHandler, value_range: Range, *args, **kwargs):
+    def __init__(self, handler: RangeSettingDrawer, value_range: Range, *args, **kwargs):
         super(RangeSlider, self).__init__(*args, **kwargs)
         self._handler = handler
         self._range = value_range

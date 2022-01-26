@@ -3,12 +3,12 @@ from PySide2 import QtCore
 from PySide2.QtWidgets import QLineEdit
 
 from propsettings.setting import Setting
-from propsettings_qt.input_handlers.input_handler import SettingDrawer
+from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
 
 
-class TextHandler(SettingDrawer):
+class TextSettingDrawer(SettingDrawer):
 	"""
-	InputHandler que se encarga de las configuraciones de tipo int, float y string a través de un QLineEdit.
+	SettingDrawer que se encarga de las configuraciones de tipo int, float y string a través de un QLineEdit.
 	"""
 
 	def __init__(self, setting_owner, setting: Setting):

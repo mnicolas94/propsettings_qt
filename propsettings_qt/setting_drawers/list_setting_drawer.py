@@ -3,10 +3,10 @@ from propsettings.setting import Setting
 from propsettings.setting_types import list_setting_type
 from propsettings_qt import setting_widget_retrieval
 
-from propsettings_qt.input_handlers.input_handler import SettingDrawer
+from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
 
 
-class ListHandler(SettingDrawer):
+class ListSettingDrawer(SettingDrawer):
 
     def __init__(self, list_setting_type: list_setting_type.List, setting_owner, setting: Setting):
         super().__init__(setting_owner=setting_owner, setting=setting)
@@ -22,7 +22,7 @@ class ListHandler(SettingDrawer):
 
 class SettingsList(QtWidgets.QWidget):
 
-    def __init__(self, list_setting_type: list_setting_type.List, handler: ListHandler, parent=None):
+    def __init__(self, list_setting_type: list_setting_type.List, handler: ListSettingDrawer, parent=None):
         super(SettingsList, self).__init__(parent=parent)
         self._handler = handler
 

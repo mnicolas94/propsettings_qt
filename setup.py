@@ -51,7 +51,7 @@ if __name__ == '__main__':
             url="https://github.com/mnicolas94/propsettings_qt",
             packages=[
                 'propsettings_qt',
-                'propsettings_qt.input_handlers',
+                'propsettings_qt.setting_drawers',
                 'propsettings_qt.object_drawers',
                 'propsettings_qt.widgets'
             ],

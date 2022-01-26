@@ -6,12 +6,12 @@ from propsettings.setting import Setting
 from propsettings.setting_type import SettingType
 from propsettings.setting_types.range_setting_type import Range
 from propsettings.setting_types.selectable_setting_type import Selectable
-from propsettings_qt.input_handlers.bool_handler import BoolHandler
-from propsettings_qt.input_handlers.input_handler import SettingDrawer
-from propsettings_qt.input_handlers.object_handler import ObjectHandler
-from propsettings_qt.input_handlers.range_handler import RangeHandler
-from propsettings_qt.input_handlers.selectable_handler import SelectableHandler
-from propsettings_qt.input_handlers.text_handler import TextHandler
+from propsettings_qt.setting_drawers.bool_setting_drawer import BoolSettingDrawer
+from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
+from propsettings_qt.setting_drawers.object_setting_drawer import ObjectSettingDrawer
+from propsettings_qt.setting_drawers.range_setting_drawer import RangeSettingDrawer
+from propsettings_qt.setting_drawers.selectable_setting_drawer import SelectableSettingDrawer
+from propsettings_qt.setting_drawers.text_setting_drawer import TextSettingDrawer
 from propsettings_qt.object_drawers.default_drawer import DefaultObjectDrawer
 from propsettings_qt.object_drawers.object_drawer import ObjectDrawer
 
@@ -20,15 +20,15 @@ object_drawers: Dict[type, Type[ObjectDrawer]] = {
 }
 
 setting_type_drawers: Dict[Type[SettingType], Type[SettingDrawer]] = {
-	Range: RangeHandler,
-	Selectable: SelectableHandler,
+	Range: RangeSettingDrawer,
+	Selectable: SelectableSettingDrawer,
 }
 
 setting_value_type_handlers: Dict[type, Type[SettingDrawer]] = {
-	bool: BoolHandler,
-	int: TextHandler,
-	float: TextHandler,
-	str: TextHandler,
+	bool: BoolSettingDrawer,
+	int: TextSettingDrawer,
+	float: TextSettingDrawer,
+	str: TextSettingDrawer,
 }
 
 
@@ -95,5 +95,5 @@ def _get_widget_by_value_type(obj, setting: Setting) -> QtWidgets.QWidget:
 		handler: SettingDrawer = handler_class(obj, setting)
 		widget = handler.get_widget()
 	else:
-		widget = ObjectHandler(obj, setting).get_widget()
+		widget = ObjectSettingDrawer(obj, setting).get_widget()
 	return widget
