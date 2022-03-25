@@ -51,7 +51,8 @@ class PathWidget(QtWidgets.QWidget):
         exists = os.path.exists(path)
         _, ext = os.path.splitext(path)
         ext = ext[1:]  # remove dot
-        valid_extension = ext in self._path.extensions
+        extensions_empty = len(self._path.extensions) == 0
+        valid_extension = ext in self._path.extensions or extensions_empty
         is_folder = self._path.is_folder
         valid_type = (
                 is_folder and os.path.isdir(path) or
