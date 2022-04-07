@@ -24,7 +24,18 @@ jobs:
           pip install
           build
           --user
+      - name: check if should build or not
+        id: shouldbuild
+        run: |
+          message=$(git log -1 --pretty=%B)
+          if [[ $message == *"--dont_build"* ]]; then
+            should=false
+          else
+            should=true
+          fi
+          echo "::set-output name=should::$should"
       - name: Build a binary wheel and a source tarball
+        if: ${{ steps.shouldbuild.outputs.should == 'true' }}
         run: >-
           python -m
           build
@@ -33,6 +44,7 @@ jobs:
           --outdir dist/
           .
       - name: Publish a Python distribution to PyPI
+        if: ${{ steps.shouldbuild.outputs.should == 'true' }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
