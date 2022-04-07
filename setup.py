@@ -75,7 +75,7 @@ if __name__ == '__main__':
             url="https://github.com/mnicolas94/propsettings_qt",
             packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
             install_requires=[
-                'propsettings',
+                'propsettings>=0.1.15',
                 'PySide2'
             ],
             classifiers=[
