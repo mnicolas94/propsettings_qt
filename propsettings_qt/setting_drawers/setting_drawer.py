@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 from propsettings.setting import Setting
 
@@ -19,7 +20,7 @@ class SettingDrawer(ABC):
 		"""
 		pass
 
-	def __init__(self, setting_owner, setting: Setting):
+	def __init__(self, setting_owner: Any, setting: Setting):
 		"""
 		Constructor que recibe el objeto que tiene la configuración y la configuración en sí.
 		:param setting_owner: objeto que tiene la configuración. Es necesario para asignarle valor a su configuración
@@ -28,7 +29,7 @@ class SettingDrawer(ABC):
 		"""
 		self._setting_owner = setting_owner
 		self._setting = setting
-		self._setting_type = setting.setting_value_type or type(self._get_value())
+		self._setting_value_type = setting.setting_value_type or type(self._get_value())
 
 	def _get_value(self):
 		"""

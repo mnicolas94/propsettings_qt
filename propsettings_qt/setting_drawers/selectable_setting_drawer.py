@@ -7,11 +7,14 @@ from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
 
 class SelectableSettingDrawer(SettingDrawer):
 
-    def __init__(self, selectable: Selectable, setting_owner, setting: Setting):
-        super(SelectableSettingDrawer, self).__init__(setting_owner, setting)
-        self._selectable = selectable
+    def __init__(self, setting_owner, setting: Setting):
+        if not isinstance(setting.setting_type, Selectable):
+            raise TypeError(f"Setting type {setting.setting_type} is not of type Selectable")
 
-        self._selectable_widget = SelectableWidget(self, selectable)
+        super(SelectableSettingDrawer, self).__init__(setting_owner, setting)
+        self._selectable: Selectable = setting.setting_type
+
+        self._selectable_widget = SelectableWidget(self, self._selectable)
         self._selectable_widget.signal_option_selected.connect(self._on_option_selected)
         self._selectable_widget.populate_options()
 

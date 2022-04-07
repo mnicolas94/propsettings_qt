@@ -8,9 +8,12 @@ from propsettings_qt.widgets.float_slider import FloatSlider
 
 class RangeSettingDrawer(SettingDrawer):
 
-    def __init__(self, value_range: Range, setting_owner, setting: Setting):
+    def __init__(self, setting_owner, setting: Setting):
+        if not isinstance(setting.setting_type, Range):
+            raise TypeError(f"Setting type {setting.setting_type} is not of type Range")
+
         super(RangeSettingDrawer, self).__init__(setting_owner, setting)
-        self._range = value_range
+        self._range: Range = setting.setting_type
 
         self._widget = RangeSlider(self, self._range)
         self._widget.set_value(self._get_value())

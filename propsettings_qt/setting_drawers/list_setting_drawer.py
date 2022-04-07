@@ -8,13 +8,15 @@ from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
 
 class ListSettingDrawer(SettingDrawer):
 
-    def __init__(self, list_setting_type: list_setting_type.List, setting_owner, setting: Setting):
+    def __init__(self, setting_owner, setting: Setting):
+        if not isinstance(setting.setting_type, list_setting_type.List):
+            raise TypeError(f"Setting type {setting.setting_type} is not of type list_setting_type.List")
         super().__init__(setting_owner=setting_owner, setting=setting)
         # validar tipo de dato de la configuración (setting)
-        st = self._setting_type
+        st = self._setting_value_type
         if st != list:
             raise TypeError(f'Wrong setting type: {st}. Setting must be of type list.')
-        self._setting_type = list_setting_type
+        self._setting_type = setting.setting_type
 
     def get_widget(self):
         pass

@@ -13,7 +13,7 @@ class BoolSettingDrawer(SettingDrawer):
 	def __init__(self, setting_owner, setting: Setting):
 		super().__init__(setting_owner=setting_owner, setting=setting)
 		# validar tipo de dato de la configuración (setting)
-		st = self._setting_type
+		st = self._setting_value_type
 		if st != bool:
 			raise TypeError(f'Wrong setting type: {st}. Setting must be of type bool.')
 

@@ -7,11 +7,13 @@ from propsettings_qt.setting_drawers.setting_drawer import SettingDrawer
 
 class PathSettingDrawer(SettingDrawer):
 
-    def __init__(self, path: Path, setting_owner, setting: Setting):
+    def __init__(self, setting_owner, setting: Setting):
+        if not isinstance(setting.setting_type, Path):
+            raise TypeError(f"Setting type {setting.setting_type} is not of type Path")
         super(PathSettingDrawer, self).__init__(setting_owner, setting)
-        self._path = path
+        self._path: Path = setting.setting_type
 
-        self._path_widget = PathWidget(self, path)
+        self._path_widget = PathWidget(self, self._path)
         self._path_widget.signal_path_changed.connect(self._on_path_changed)
         self._path_widget.set_value(self._get_value())
 

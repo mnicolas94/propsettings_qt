@@ -4,6 +4,7 @@ from PySide2 import QtWidgets
 
 from propsettings.setting import Setting
 from propsettings.setting_type import SettingType
+from propsettings.setting_types.password_setting_type import Password
 from propsettings.setting_types.path_setting_type import Path
 from propsettings.setting_types.range_setting_type import Range
 from propsettings.setting_types.selectable_setting_type import Selectable
@@ -25,6 +26,7 @@ setting_type_drawers: Dict[Type[SettingType], Type[SettingDrawer]] = {
 	Range: RangeSettingDrawer,
 	Selectable: SelectableSettingDrawer,
 	Path: PathSettingDrawer,
+	Password: TextSettingDrawer
 }
 
 setting_value_type_handlers: Dict[type, Type[SettingDrawer]] = {
@@ -84,9 +86,9 @@ def _get_widget_by_setting_type(obj, setting: Setting) -> Optional[QtWidgets.QWi
 	if setting_type is not None:
 		setting_type_type = type(setting_type)
 		if setting_type_type in setting_type_drawers:
-			handler_class = setting_type_drawers[setting_type_type]
-			handler = handler_class(setting_type, obj, setting)
-			widget = handler.get_widget()
+			drawer_class = setting_type_drawers[setting_type_type]
+			drawer = drawer_class(obj, setting)
+			widget = drawer.get_widget()
 			return widget
 	return None
 
@@ -94,9 +96,9 @@ def _get_widget_by_setting_type(obj, setting: Setting) -> Optional[QtWidgets.QWi
 def _get_widget_by_value_type(obj, setting: Setting) -> QtWidgets.QWidget:
 	setting_value_type = setting.setting_value_type or type(setting.fget(obj))
 	if setting_value_type in setting_value_type_handlers:
-		handler_class: type = setting_value_type_handlers[setting_value_type]
-		handler: SettingDrawer = handler_class(obj, setting)
-		widget = handler.get_widget()
+		drawer_class: type = setting_value_type_handlers[setting_value_type]
+		drawer: SettingDrawer = drawer_class(obj, setting)
+		widget = drawer.get_widget()
 	else:
 		widget = ObjectSettingDrawer(obj, setting).get_widget()
 	return widget
